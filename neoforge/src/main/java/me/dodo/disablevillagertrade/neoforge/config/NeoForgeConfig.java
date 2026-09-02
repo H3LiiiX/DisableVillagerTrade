@@ -25,6 +25,11 @@ public class NeoForgeConfig implements ModConfig {
     public static final ModConfigSpec.IntValue UPDATE_CHECK_INTERVAL;
     public static final ModConfigSpec.BooleanValue NOTIFY_ON_JOIN;
     public static final ModConfigSpec.ConfigValue<String> UPDATE_MESSAGE;
+
+    // Misc settings
+    public static final ModConfigSpec.BooleanValue ENABLE_FOR_OP;
+    public static final ModConfigSpec.BooleanValue SHAKE_HEAD_ENABLED;
+    public static final ModConfigSpec.BooleanValue ENABLE_WANDERING_TRADER_TRADES;
     
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -60,6 +65,18 @@ public class NeoForgeConfig implements ModConfig {
             .comment("Message shown when an update is available",
                     "Placeholders: %current% (current version), %latest% (latest version)")
             .define("message", Constants.DEFAULT_UPDATE_MESSAGE);
+        builder.pop();
+        
+        builder.comment("Misc Settings").push("misc");
+        ENABLE_FOR_OP = builder
+            .comment("If true, OP players are also blocked from trading (mod applies to them)")
+            .define("enable_for_op", false);
+        SHAKE_HEAD_ENABLED = builder
+            .comment("If true, villagers will shake their head when trading is blocked")
+            .define("shake_head_enabled", false);
+        ENABLE_WANDERING_TRADER_TRADES = builder
+            .comment("If false, wandering traders are blocked just like normal villagers")
+            .define("enable_wandering_trader_trades", false);
         builder.pop();
         
         SPEC = builder.build();
@@ -101,6 +118,21 @@ public class NeoForgeConfig implements ModConfig {
         return UPDATE_MESSAGE.get();
     }
     
+    @Override
+    public boolean isEnableForOp() {
+        return ENABLE_FOR_OP.get();
+    }
+    
+    @Override
+    public boolean isShakeHeadEnabled() {
+        return SHAKE_HEAD_ENABLED.get();
+    }
+    
+    @Override
+    public boolean isEnableWanderingTraderTrades() {
+        return ENABLE_WANDERING_TRADER_TRADES.get();
+    }
+
     @Override
     public void reload() {
         // NeoForge configs are automatically synced

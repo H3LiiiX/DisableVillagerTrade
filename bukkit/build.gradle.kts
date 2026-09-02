@@ -15,7 +15,7 @@ base {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+        languageVersion.set(JavaLanguageVersion.of(25))
     }
 }
 
@@ -92,7 +92,7 @@ tasks {
 
     test {
         useJUnitPlatform()
-        finalizedBy(jacocoTestReport)
+        // finalizedBy(jacocoTestReport)
     }
 
     jacocoTestReport {

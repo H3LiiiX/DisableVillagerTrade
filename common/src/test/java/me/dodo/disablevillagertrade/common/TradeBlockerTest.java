@@ -34,6 +34,8 @@ class TradeBlockerTest {
                 true,
                 "world",
                 Collections.emptyList(),
+                false,
+                false,
                 false
             );
             
@@ -55,6 +57,8 @@ class TradeBlockerTest {
                 true,
                 "world",
                 Collections.emptyList(),
+                false,
+                false,
                 false
             );
             
@@ -74,6 +78,8 @@ class TradeBlockerTest {
                 true,
                 "world",
                 Collections.emptyList(),
+                false,
+                false,
                 false
             );
             
@@ -92,6 +98,8 @@ class TradeBlockerTest {
                 true,
                 "world",
                 Collections.emptyList(),
+                false,
+                false,
                 false
             );
             
@@ -113,7 +121,9 @@ class TradeBlockerTest {
                 true,
                 "world",
                 Collections.emptyList(),
-                true  // has bypass permission
+                true,  // has bypass permission
+                false,
+                false
             );
             
             assertFalse(result, "Players with bypass permission should be able to trade");
@@ -129,7 +139,9 @@ class TradeBlockerTest {
                 true,
                 "world",
                 Collections.emptyList(),
-                false  // no bypass permission
+                false,  // no bypass permission
+                false,
+                false
             );
             
             assertTrue(result, "Players without bypass permission should be blocked");
@@ -152,6 +164,8 @@ class TradeBlockerTest {
                 true,
                 "spawn",  // this world is in disabled list
                 disabledWorlds,
+                false,
+                false,
                 false
             );
             
@@ -170,6 +184,8 @@ class TradeBlockerTest {
                 true,
                 "survival",  // this world is NOT in disabled list
                 disabledWorlds,
+                false,
+                false,
                 false
             );
             
@@ -186,6 +202,8 @@ class TradeBlockerTest {
                 true,
                 "world",
                 Collections.emptyList(),
+                false,
+                false,
                 false
             );
             
@@ -202,6 +220,8 @@ class TradeBlockerTest {
                 true,
                 "world",
                 null,
+                false,
+                false,
                 false
             );
             
@@ -223,6 +243,8 @@ class TradeBlockerTest {
                 true,
                 "world",
                 Collections.emptyList(),
+                false,
+                false,
                 false
             );
             
@@ -239,6 +261,8 @@ class TradeBlockerTest {
                 false,  // no gravity
                 "world",
                 Collections.emptyList(),
+                false,
+                false,
                 false
             );
             
@@ -255,6 +279,8 @@ class TradeBlockerTest {
                 true,  // has gravity
                 "world",
                 Collections.emptyList(),
+                false,
+                false,
                 false
             );
             
@@ -278,7 +304,9 @@ class TradeBlockerTest {
                 true,       // has gravity
                 "survival", // not in disabled worlds
                 Collections.emptyList(),
-                true        // HAS bypass permission
+                true,        // HAS bypass permission
+                false,
+                false
             );
             
             assertFalse(result, "Bypass permission should override all blocking conditions");
@@ -294,7 +322,9 @@ class TradeBlockerTest {
                 true,
                 "survival",
                 Collections.emptyList(),
-                false       // no bypass permission
+                false,       // no bypass permission
+                false,
+                false
             );
             
             assertFalse(result, "NONE profession should allow trading");
@@ -310,7 +340,9 @@ class TradeBlockerTest {
                 true,           // has gravity
                 "survival",     // not in disabled worlds
                 Arrays.asList("spawn"),
-                false           // no bypass permission
+                false,           // no bypass permission
+                false,
+                false
             );
             
             assertTrue(result, "Trade should be blocked when all conditions are met");

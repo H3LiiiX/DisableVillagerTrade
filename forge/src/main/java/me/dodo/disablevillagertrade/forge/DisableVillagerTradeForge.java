@@ -9,6 +9,7 @@ import me.dodo.disablevillagertrade.forge.events.VillagerTradeHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -65,6 +66,7 @@ public class DisableVillagerTradeForge {
         ServerStoppingEvent.BUS.addListener(this::onServerStopping);
         PlayerEvent.PlayerLoggedInEvent.BUS.addListener(this::onPlayerJoin);
         PlayerInteractEvent.EntityInteract.BUS.addListener(tradeHandler::onPlayerInteractEntity);
+        net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent.BUS.addListener(new WanderingTraderTickHandler()::onLivingTick);
         RegisterCommandsEvent.BUS.addListener(this::onRegisterCommands);
     }
     

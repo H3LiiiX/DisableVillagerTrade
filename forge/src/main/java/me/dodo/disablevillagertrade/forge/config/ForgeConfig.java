@@ -64,6 +64,9 @@ public class ForgeConfig implements ModConfig {
         properties.setProperty(KEY_UPDATE_CHECK_INTERVAL, String.valueOf(Constants.DEFAULT_UPDATE_CHECK_INTERVAL));
         properties.setProperty(KEY_NOTIFY_ON_JOIN, String.valueOf(Constants.DEFAULT_NOTIFY_ON_JOIN));
         properties.setProperty(KEY_UPDATE_MESSAGE, Constants.DEFAULT_UPDATE_MESSAGE);
+        properties.setProperty("enable_for_op", String.valueOf(Constants.DEFAULT_ENABLE_FOR_OP));
+        properties.setProperty("shake_head_enabled", String.valueOf(Constants.DEFAULT_SHAKE_HEAD_ENABLED));
+        properties.setProperty("enable_wandering_trader_trades", String.valueOf(Constants.DEFAULT_ENABLE_WANDERING_TRADER_TRADES));
     }
     
     private void save() {
@@ -125,6 +128,21 @@ public class ForgeConfig implements ModConfig {
     @Override
     public String getUpdateMessage() {
         return properties.getProperty(KEY_UPDATE_MESSAGE, Constants.DEFAULT_UPDATE_MESSAGE);
+    }
+    
+    @Override
+    public boolean isEnableForOp() {
+        return Boolean.parseBoolean(properties.getProperty("enable_for_op", "false"));
+    }
+    
+    @Override
+    public boolean isShakeHeadEnabled() {
+        return Boolean.parseBoolean(properties.getProperty("shake_head_enabled", String.valueOf(Constants.DEFAULT_SHAKE_HEAD_ENABLED)));
+    }
+    
+    @Override
+    public boolean isEnableWanderingTraderTrades() {
+        return Boolean.parseBoolean(properties.getProperty("enable_wandering_trader_trades", String.valueOf(Constants.DEFAULT_ENABLE_WANDERING_TRADER_TRADES)));
     }
     
     @Override

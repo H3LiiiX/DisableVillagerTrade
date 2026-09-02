@@ -95,6 +95,21 @@ public class FabricConfig implements ModConfig {
     }
     
     @Override
+    public boolean isEnableForOp() {
+        return data.enableForOp;
+    }
+
+    @Override
+    public boolean isShakeHeadEnabled() {
+        return data.shakeHeadEnabled;
+    }
+    
+    @Override
+    public boolean isEnableWanderingTraderTrades() {
+        return data.enableWanderingTraderTrades;
+    }
+    
+    @Override
     public void reload() {
         load();
     }
@@ -110,6 +125,9 @@ public class FabricConfig implements ModConfig {
         int updateCheckInterval = Constants.DEFAULT_UPDATE_CHECK_INTERVAL;
         boolean notifyOnJoin = Constants.DEFAULT_NOTIFY_ON_JOIN;
         String updateMessage = Constants.DEFAULT_UPDATE_MESSAGE;
+        boolean enableForOp = Constants.DEFAULT_ENABLE_FOR_OP;
+        boolean shakeHeadEnabled = Constants.DEFAULT_SHAKE_HEAD_ENABLED;
+        boolean enableWanderingTraderTrades = Constants.DEFAULT_ENABLE_WANDERING_TRADER_TRADES;
     }
 }
 

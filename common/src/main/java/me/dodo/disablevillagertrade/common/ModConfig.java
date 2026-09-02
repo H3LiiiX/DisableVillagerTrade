@@ -51,6 +51,26 @@ public interface ModConfig {
     String getUpdateMessage();
     
     /**
+     * Checks if the mod is active for OP players.
+     * If false, OP players bypass the block.
+     * @return true if OP players are also blocked from trading.
+     */
+    boolean isEnableForOp();
+
+    /**
+     * Checks if villagers should shake their head when trade is blocked.
+     * @return true if head shaking is enabled
+     */
+    boolean isShakeHeadEnabled();
+
+    /**
+     * Checks if trading with wandering traders is enabled.
+     * If false, wandering traders are blocked just like normal villagers.
+     * @return true if trading with wandering traders is allowed
+     */
+    boolean isEnableWanderingTraderTrades();
+
+    /**
      * Reloads the configuration from disk.
      */
     void reload();

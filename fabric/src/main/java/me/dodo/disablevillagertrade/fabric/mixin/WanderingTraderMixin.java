@@ -3,13 +3,11 @@ package me.dodo.disablevillagertrade.fabric.mixin;
 import me.dodo.disablevillagertrade.common.Constants;
 import me.dodo.disablevillagertrade.fabric.DisableVillagerTradeFabric;
 import me.dodo.disablevillagertrade.fabric.config.FabricConfig;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.npc.villager.Villager;
-import net.minecraft.world.entity.npc.villager.VillagerProfession;
+import net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,10 +15,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Mixin to intercept villager interactions and block trading.
+ * Mixin to intercept wandering trader interactions and block trading.
  */
-@Mixin(Villager.class)
-public abstract class VillagerMixin {
+@Mixin(WanderingTrader.class)
+public abstract class WanderingTraderMixin {
     
     @Inject(method = "mobInteract", at = @At("HEAD"), cancellable = true)
     private void onMobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
@@ -29,14 +27,13 @@ public abstract class VillagerMixin {
             return;
         }
         
-        Villager villager = (Villager) (Object) this;
+        WanderingTrader trader = (WanderingTrader) (Object) this;
         FabricConfig config = DisableVillagerTradeFabric.getConfig();
         
-        // Get profession name from VillagerData - profession() returns Holder<VillagerProfession>
-        Holder<VillagerProfession> professionHolder = villager.getVillagerData().profession();
-        String professionName = professionHolder.unwrapKey()
-            .map(key -> key.identifier().getPath().toUpperCase())
-            .orElse("NONE");
+        // Check if wandering trader trades are enabled
+        if (config.isEnableWanderingTraderTrades()) {
+            return;
+        }
         
         // Get dimension name
         String dimensionName = player.level().dimension().identifier().toString();
@@ -50,11 +47,12 @@ public abstract class VillagerMixin {
         }
         
         // Check if trade should be blocked
+        // We pass "WANDERING_TRADER" as profession to bypass NONE checks, but shouldBlockTrade is just logic.
         boolean shouldBlock = DisableVillagerTradeFabric.getTradeBlocker().shouldBlockTrade(
             true,
-            professionName,
-            !villager.isNoAi(),       // hasAI
-            !villager.isNoGravity(),  // hasGravity
+            "WANDERING_TRADER",
+            !trader.isNoAi(),       // hasAI
+            !trader.isNoGravity(),  // hasGravity
             dimensionName,
             config.getDisabledWorlds(),
             hasBypass,
@@ -67,10 +65,10 @@ public abstract class VillagerMixin {
             cir.setReturnValue(InteractionResult.FAIL);
             
             if (config.isShakeHeadEnabled()) {
-                villager.setUnhappyCounter(40);
+                trader.setUnhappyCounter(40);
             }
             
-            villager.playSound(net.minecraft.sounds.SoundEvents.VILLAGER_NO, 1.0F, villager.getVoicePitch());
+            trader.playSound(net.minecraft.sounds.SoundEvents.WANDERING_TRADER_NO, 1.0F, trader.getVoicePitch());
             
             // Send message to player
             if (config.isMessageEnabled() && player instanceof ServerPlayer serverPlayer) {

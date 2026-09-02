@@ -20,6 +20,9 @@ public class BukkitConfig implements ModConfig {
     private int updateCheckInterval;
     private boolean notifyOnJoin;
     private String updateMessage;
+    private boolean enableForOp;
+    private boolean shakeHeadEnabled;
+    private boolean enableWanderingTraderTrades;
 
     /**
      * Creates a new plugin configuration from the plugin's config.yml.
@@ -36,6 +39,9 @@ public class BukkitConfig implements ModConfig {
         this.messageEnabled = config.getBoolean("message.enabled", true);
         this.message = config.getString("message.text", "&cYou can't trade with villagers on this server.");
         this.disabledWorlds = config.getStringList("disabled-worlds");
+        this.enableForOp = config.getBoolean("enable-for-op", false);
+        this.shakeHeadEnabled = config.getBoolean("shake-head-enabled", false);
+        this.enableWanderingTraderTrades = config.getBoolean("enable-wandering-trader-trades", false);
         
         // Update checker settings
         this.updateCheckerEnabled = config.getBoolean("update-checker.enabled", true);
@@ -78,6 +84,21 @@ public class BukkitConfig implements ModConfig {
     @Override
     public String getUpdateMessage() {
         return updateMessage;
+    }
+    
+    @Override
+    public boolean isEnableForOp() {
+        return enableForOp;
+    }
+
+    @Override
+    public boolean isShakeHeadEnabled() {
+        return shakeHeadEnabled;
+    }
+    
+    @Override
+    public boolean isEnableWanderingTraderTrades() {
+        return enableWanderingTraderTrades;
     }
     
     @Override

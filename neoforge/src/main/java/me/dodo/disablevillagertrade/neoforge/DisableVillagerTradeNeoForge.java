@@ -6,6 +6,7 @@ import me.dodo.disablevillagertrade.common.UpdateChecker;
 import me.dodo.disablevillagertrade.neoforge.commands.DvtCommand;
 import me.dodo.disablevillagertrade.neoforge.config.NeoForgeConfig;
 import me.dodo.disablevillagertrade.neoforge.events.VillagerTradeHandler;
+import me.dodo.disablevillagertrade.neoforge.events.WanderingTraderTickHandler;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -56,6 +57,7 @@ public class DisableVillagerTradeNeoForge {
         // Register event handlers
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(new VillagerTradeHandler());
+        NeoForge.EVENT_BUS.register(new WanderingTraderTickHandler());
         
         LOGGER.info("DisableVillagerTrade initialized!");
     }

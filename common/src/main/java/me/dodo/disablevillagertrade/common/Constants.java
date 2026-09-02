@@ -17,12 +17,14 @@ public final class Constants {
     public static final String PERMISSION_ADMIN = "disabletrade.admin";
     public static final String PERMISSION_UPDATE = "disabletrade.update";
     
-    // Default config values
-    public static final boolean DEFAULT_MESSAGE_ENABLED = true;
+    // Default configuration values
+    public static final boolean DEFAULT_MESSAGE_ENABLED = false;
     public static final String DEFAULT_MESSAGE = "§cYou can't trade with villagers on this server.";
-    public static final boolean DEFAULT_UPDATE_CHECKER_ENABLED = true;
+    public static final boolean DEFAULT_UPDATE_CHECKER_ENABLED = false;
     public static final int DEFAULT_UPDATE_CHECK_INTERVAL = 24;
-    public static final boolean DEFAULT_NOTIFY_ON_JOIN = true;
+    public static final boolean DEFAULT_NOTIFY_ON_JOIN = false;
     public static final String DEFAULT_UPDATE_MESSAGE = "§e[DisableVillagerTrade] §fA new version is available! §7(%current% → %latest%)";
+    public static final boolean DEFAULT_ENABLE_FOR_OP = true;
+    public static final boolean DEFAULT_SHAKE_HEAD_ENABLED = true;
+    public static final boolean DEFAULT_ENABLE_WANDERING_TRADER_TRADES = true;
 }
-

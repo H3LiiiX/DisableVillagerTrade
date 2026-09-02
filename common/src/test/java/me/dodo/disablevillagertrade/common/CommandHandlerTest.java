@@ -36,8 +36,30 @@ class CommandHandlerTest {
         @Override public boolean isUpdateCheckerEnabled() { return updateCheckerEnabled; }
         @Override public int getUpdateCheckInterval() { return updateCheckInterval; }
         @Override public boolean isNotifyOnJoin() { return notifyOnJoin; }
-        @Override public String getUpdateMessage() { return ""; }
-        @Override public void reload() {}
+        @Override
+        public String getUpdateMessage() {
+            return "Update!";
+        }
+        
+        @Override
+        public boolean isEnableForOp() {
+            return false;
+        }
+        
+        @Override
+        public boolean isShakeHeadEnabled() {
+            return false;
+        }
+
+        @Override
+        public boolean isEnableWanderingTraderTrades() {
+            return false;
+        }
+
+        @Override
+        public void reload() {
+            // Do nothing
+        }
     }
 
     // -------------------------------------------------------------------------
