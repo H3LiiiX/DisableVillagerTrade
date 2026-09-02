@@ -12,19 +12,21 @@ Disable villager trade on your Minecraft server! Now supports **multiple platfor
 
 | Platform | Minecraft Version | Status |
 |----------|-------------------|--------|
-| **Bukkit/Spigot/Paper** | 1.14 - 1.21.11+ | ✅ Full Support |
-| **Fabric** | 1.21.11 | ✅ Full Support |
-| **Forge** | 1.21.11 | ✅ Full Support |
-| **NeoForge** | 1.21.11 | ✅ Full Support |
-| **Quilt** | 1.21.11 | ✅ Use Fabric version |
+| **Bukkit/Spigot/Paper** | 1.14 - 26.2+ | ✅ Full Support |
+| **Fabric** | 26.2 | ✅ Full Support |
+| **Forge** | 26.2 | ✅ Logic Updated (Requires ForgeGradle Update) |
+| **NeoForge** | 26.2 | ✅ Full Support |
+| **Quilt** | 26.2 | ✅ Use Fabric version |
 
 > **Note:** Quilt is compatible with Fabric mods. Simply use the Fabric version on Quilt servers/clients.
 
 ## ✨ Features
 
 - 🚫 Prevent players from trading with villagers
+- 🦙 Prevent players from trading with wandering traders (configurable)
 - 💬 Configurable message when trading is blocked
-- 🔓 Bypass permission for staff members
+- 🔓 Bypass permission for staff members or server operators (configurable)
+- 🗣️ Villagers and wandering traders play the "No" sound and shake their heads when blocked
 - 🌍 Per-world/dimension exclusion configuration
 - 👨‍🌾 Villagers with no profession (unemployed) can still be interacted with
 - 🔔 Automatic update checker with notifications
@@ -65,45 +67,60 @@ Disable villager trade on your Minecraft server! Now supports **multiple platfor
 ```yaml
 # Message settings
 message:
-  enabled: true
+  enabled: false
   text: "&cYou can't trade with villagers on this server."
 
 # Worlds where villager trading is ALLOWED (not blocked)
-disabled-worlds:
-  - example-world
+disabled-worlds: []
 
 # Update checker settings
 update-checker:
-  enabled: true
+  enabled: false
   check-interval: 24
-  notify-on-join: true
+  notify-on-join: false
+  message: "&e[DisableVillagerTrade] &fA new version is available! &7(%current% -> %latest%)"
+
+# Miscellaneous
+enable-for-op: true
+shake-head-enabled: true
+enable-wandering-trader-trades: true
 ```
 
 ### Fabric (disablevillagertrade.json)
 ```json
 {
-  "messageEnabled": true,
+  "messageEnabled": false,
   "message": "§cYou can't trade with villagers on this server.",
   "disabledDimensions": [],
-  "updateCheckerEnabled": true,
+  "updateCheckerEnabled": false,
   "updateCheckInterval": 24,
-  "notifyOnJoin": true
+  "notifyOnJoin": false,
+  "updateMessage": "§e[DisableVillagerTrade] §fA new version is available! §7(%current% → %latest%)",
+  "enableForOp": true,
+  "shakeHeadEnabled": true,
+  "enableWanderingTraderTrades": true
 }
 ```
 
 ### Forge/NeoForge (disablevillagertrade-server.toml)
 ```toml
 [message]
-enabled = true
+enabled = false
 text = "§cYou can't trade with villagers on this server."
 
 [dimensions]
 disabled_dimensions = []
 
 [update_checker]
-enabled = true
+enabled = false
 check_interval = 24
-notify_on_join = true
+notify_on_join = false
+message = "§e[DisableVillagerTrade] §fA new version is available! §7(%current% → %latest%)"
+
+# Miscellaneous
+enable_for_op = true
+shake_head_enabled = true
+enable_wandering_trader_trades = true
 ```
 
 ## 🔧 Commands
